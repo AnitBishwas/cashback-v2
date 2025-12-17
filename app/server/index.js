@@ -128,6 +128,7 @@ const createServer = async (root = process.cwd()) => {
           server: app.listen(PORT, () => {
             console.log(`Dev server running on localhost:${PORT}`);
           }),
+          host: process.env.SHOPIFY_APP_URL.replace(/^https?:\/\//, ""),
         },
       },
       appType: "spa",

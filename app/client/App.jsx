@@ -1,4 +1,4 @@
-import { AppProvider as PolarisProvider } from "@shopify/polaris";
+import { Link, AppProvider as PolarisProvider } from "@shopify/polaris";
 import "@shopify/polaris/build/esm/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
 import { useRoutes } from "raviger";
@@ -12,8 +12,6 @@ export default function App() {
     <PolarisProvider i18n={translations}>
       <AppBridgeProvider>
         <ui-nav-menu>
-          <a href="/debug/data">Fetch Data</a>
-          <a href="/debug/billing">Billing API</a>
         </ui-nav-menu>
         {RouteComponents}
       </AppBridgeProvider>

@@ -1,0 +1,17 @@
+<div id="root">
+  {% liquid
+    # Relative to entrypointsDir
+    render 'vite-tag' with 'theme.css'
+    render 'vite-tag' with 'theme.jsx'
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "Cashback extension",
+  "target": "section",
+  "settings": [
+  ]
+}
+{% endschema %}
+
