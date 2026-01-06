@@ -1,5 +1,6 @@
 import { Router } from "express";
 import clientProvider from "../../../utils/clientProvider.js";
+import widgetRoutes from "./widget.js";
 const proxyRouter = Router();
 
 /**
@@ -17,5 +18,5 @@ proxyRouter.get("/json", async (req, res) => {
     return res.status(400).send({ error: true });
   }
 });
-
+proxyRouter.use("/widget", widgetRoutes);
 export default proxyRouter;

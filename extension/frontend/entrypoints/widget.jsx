@@ -1,11 +1,11 @@
 import 'vite/modulepreload-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from '@/components/App'
+import Widget from '../components/Widget'
 import './theme.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('widget')).render(
   <React.StrictMode>
-    <App home={home} />
+    <Widget />
   </React.StrictMode>
 )

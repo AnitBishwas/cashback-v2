@@ -1,8 +1,19 @@
-<div id="root">
+{% liquid
+  assign root_id = 'cashback-page'
+  if block.settings.widget
+    assign root_id = 'widget'
+  endif
+%}
+
+<div id="{{ root_id }}">
   {% liquid
     # Relative to entrypointsDir
     render 'vite-tag' with 'theme.css'
-    render 'vite-tag' with 'theme.jsx'
+    if block.settings.widget
+      render 'vite-tag' with 'widget.jsx'
+    else
+      render 'vite-tag' with 'landingPage.jsx'
+    endif
   %}
 </div>
 
@@ -11,6 +22,11 @@
   "name": "Cashback extension",
   "target": "section",
   "settings": [
+    {
+      "type":"checkbox",
+      "label":"Enable widget",
+      "id":"widget"
+    },
   ]
 }
 {% endschema %}

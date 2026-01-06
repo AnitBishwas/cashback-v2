@@ -4,8 +4,13 @@ module.exports = {
     "./frontend/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      primary: ['Roboto'],
+      secondary: ['Nunito Sans'],
+      heading: ['Nunito Sans'],
+    },
     extend: {},
   },
   plugins: [],
-  prefix: 'tw-'
+  prefix: 'cb-'
 }

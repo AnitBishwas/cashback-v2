@@ -1,5 +1,10 @@
 import { Router } from "express";
 import clientProvider from "../../utils/clientProvider.js";
+import settingRoutes from "./admin_routes/settings.js";
+import logsRouter from "./admin_routes/logs.js";
+import discountRoutes from "./admin_routes/discounts.js";
+import customerRoutes from "./admin_routes/customer.js";
+import distributionRoutes from "./admin_routes/distribution.js";
 
 const userRoutes = Router();
 
@@ -211,4 +216,9 @@ userRoutes.get("/debug/createNewSubscription", async (req, res) => {
   }
 });
 
+userRoutes.use("/settings", settingRoutes);
+userRoutes.use("/logs", logsRouter);
+userRoutes.use("/discounts", discountRoutes);
+userRoutes.use("/customer", customerRoutes);
+userRoutes.use("/distribution", distributionRoutes);
 export default userRoutes;
