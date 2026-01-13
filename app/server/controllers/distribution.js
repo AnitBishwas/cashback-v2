@@ -4,6 +4,11 @@ import CustomerModel from "../../utils/models/Customer.js";
 import PointModel from "../../utils/models/Point.js";
 import TransactionModel from "../../utils/models/Transaction.js";
 import RecordModal from "../../utils/models/Records.js";
+// import WalletModel from "@swiss-beauty/cashback-schema/src/models/Wallet.model.js";
+// import CustomerModel from "@swiss-beauty/cashback-schema/src/models/CustomKeys.model.js";
+// import PointModel from "@swiss-beauty/cashback-schema/src/models/Point.model.js";
+// import TransactionModel from "@swiss-beauty/cashback-schema/src/models/Transaction.model.js";
+// import RecordModal from "@swiss-beauty/cashback-schema/src/models/Record.model.js";
 
 /**
  * @param {string} id - shopify customer id
@@ -16,7 +21,7 @@ const normalizeCustomerId = (id) =>
  * @param {object} user - admin user details
  */
 
-const distributeCashback = async (payload,user) => {
+const distributeCashback = async (payload, user) => {
   const session = await mongoose.startSession();
 
   try {

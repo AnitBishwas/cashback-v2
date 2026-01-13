@@ -13,7 +13,10 @@ distributionRoutes.post("/", async (req, res) => {
     if (isPayloadValid.error) {
       throw new Error("Incorrect pyalod");
     }
-    const distribute = await distributeCashback(payload,res.locals.user_session.onlineAccessInfo.associated_user);
+    const distribute = await distributeCashback(
+      payload,
+      res.locals.user_session.onlineAccessInfo.associated_user
+    );
     res.status(200).json({
       ok: true,
     });

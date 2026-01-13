@@ -28,7 +28,7 @@ const getCashbackDiscountLogs = async () => {
     );
   }
 };
-const getDistributionLogs = async () =>{
+const getDistributionLogs = async () => {
   try {
     const url = `/api/apps/logs?type=distribution`;
     const request = await fetch(url);
@@ -42,5 +42,9 @@ const getDistributionLogs = async () =>{
       "🕔 Failed to get cashback settings logs reason -->" + err.message
     );
   }
-}
-export { getCashbackSettingsLogs, getCashbackDiscountLogs,getDistributionLogs };
+};
+export {
+  getCashbackSettingsLogs,
+  getCashbackDiscountLogs,
+  getDistributionLogs,
+};

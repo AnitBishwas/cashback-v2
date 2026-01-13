@@ -53,8 +53,10 @@ export default function () {
               </p>
             </div>
             {
-              widgetData.expiringCredits && <div>
-
+              widgetData.expiringCredits?.length > 0 && <div className="cb-bg-[#FFE1E1] cb-rounded-[8px] cb-border-solid cb-border-[#FF5B6F] cb-border-[1px] cb-py-[6px] cb-flex cb-justify-center cb-items-center">
+                <p className="cb-font-secondary cb-leading-none cb-text-[12px] cb-font-medium cb-text-[#F00]">
+                  Your cashback worth ₹{widgetData.expiringCredits[0].amount} will expire in
+                </p>
               </div>
             }
           </div>
