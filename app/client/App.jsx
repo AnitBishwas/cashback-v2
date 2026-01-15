@@ -14,6 +14,7 @@ export default function App() {
         <ui-nav-menu>
           <Link href="/discounts">Manage Discounts</Link>
           <Link href="/distribution">Manage Distribution</Link>
+          <Link href="/storefront-offers">Storefront offers</Link>
           <Link href="/settings">Settings</Link>
         </ui-nav-menu>
         {RouteComponents}

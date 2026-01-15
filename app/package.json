@@ -27,6 +27,7 @@
     "preserve": "npm run build"
   },
   "dependencies": {
+    "@emotion/css": "^11.13.5",
     "@shopify/app-bridge-react": "^4.2.8",
     "@shopify/polaris": "^13.9.5",
     "@shopify/shopify-api": "^12.1.2",
@@ -36,12 +37,17 @@
     "cryptr": "^6.4.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "is-hotkey": "^0.2.0",
     "joi": "^18.0.2",
     "mongoose": "^9.0.1",
     "raviger": "^5.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "serve-static": "^2.2.0"
+    "react-sortablejs": "^6.1.4",
+    "serve-static": "^2.2.0",
+    "slate": "^0.123.0",
+    "slate-history": "^0.113.1",
+    "slate-react": "^0.123.0"
   },
   "devDependencies": {
     "@iarna/toml": "^2.2.5",

@@ -11,7 +11,7 @@ import { ExternalIcon } from "@shopify/polaris-icons";
 import { navigate } from "raviger";
 
 const HomePage = () => {
-  return <>Aniiiiti</>;
+  return <></>;
 };
 
 export default HomePage;
