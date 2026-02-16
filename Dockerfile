@@ -14,6 +14,10 @@ ARG VITE_SHOPIFY_API_KEY
 # Accept token at build time
 ARG NPM_TOKEN
 
+# Create npm config inside container
+RUN echo "@swiss-beauty:registry=https://registry.npmjs.org/" > .npmrc \
+ && echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
+
 ENV SHOPIFY_API_KEY=$SHOPIFY_API_KEY
 ENV SHOPIFY_APP_URL=$SHOPIFY_APP_URL
 ENV VITE_SHOPIFY_API_KEY=$VITE_SHOPIFY_API_KEY
