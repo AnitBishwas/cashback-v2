@@ -185,7 +185,7 @@ export default function CashbackCartWidget({ isDrawerOpen: isDrawerOpenProp } = 
   if (!widgetData || !cartData || cartData?.item_count <= 0) return null;
 
   return (
-    <div className="cashback-cart-widget cb-mx-4 cb-mb-4">
+    <div className="cashback-cart-widget cb-mx-4 cb-mb-4 cb-mt-4">
       <div className="cb-bg-[linear-gradient(0deg,_#FFF3F4_-9.23%,_#FFD7E3_66.15%)] cb-rounded-ss-[12px] cb-rounded-se-[12px] cb-border-solid cb-border-[1px] cb-border-[#FFD2D6] cb-border-b-0">
         <div>
           <div className="cb-px-3 cb-pt-3 cb-flex cb-gap-3">
