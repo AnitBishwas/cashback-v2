@@ -16,7 +16,9 @@ const HomePage = () => {
     <Page>
       <InlineGrid columns={2} gap={200}>
         <Card>
-          <Link variant="breadcrumb" href="/customer-wallet">Customer wallet</Link>
+          <Link variant="breadcrumb" href="/customer-wallet">
+            Customer wallet
+          </Link>
         </Card>
         <Card>
           <Link href="/discounts">Manage Discounts</Link>

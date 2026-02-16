@@ -16,6 +16,7 @@ import CustomerDistributionRow from "../../components/distribution/CustomerDistr
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { distributeCashback } from "../../helpers/distribute.js";
 import BulkDistribution from "../../components/distribution/BulkDistribution";
+import { useNavigate } from "raviger";
 
 const Distribution = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -24,6 +25,7 @@ const Distribution = () => {
   const [payloadValid, setPayloadValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const shopify = useAppBridge();
+  const navigator = useNavigate();
 
   const handleSearchKeywordFocus = () => {
     document.dispatchEvent(new Event("custom:displayCustomerPopup"));
@@ -150,6 +152,10 @@ const Distribution = () => {
         primaryAction={{
           content: "Bulk distribute",
           onAction: handleBulkDistributeButtonClick,
+        }}
+        backAction={{
+          content: "Home",
+          onAction: () => {navigator("/")}
         }}
       >
         <BulkDistribution />

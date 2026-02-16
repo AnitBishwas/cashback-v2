@@ -53,6 +53,10 @@ const StorefrontOffer = () => {
           icon: DiscountFilledIcon,
           onAction: () => navigator("/storefront-offers/create"),
         }}
+        backAction={{
+          content: 'Home',
+          onAction:() => {navigator("/")}
+        }}
       >
         <Layout>
           <Layout.Section>
