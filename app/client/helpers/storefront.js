@@ -78,9 +78,47 @@ const updateStorefrontOfferPosition = async (id, position) => {
     );
   }
 };
+
+const getOffer = async (id) => {
+  try {
+    if (!id) {
+      throw new Error("Id is required");
+    }
+    const url = `/api/apps/storefront/offers/${id}`;
+    const request = await fetch(url);
+    const res = await request.json();
+    if (!res.ok) {
+      throw new Error("Failed to get offer");
+    }
+    return res.offer;
+  } catch (err) {
+    throw new Error("Failed to get offer reason -->" + err.message);
+  }
+};
+
+const updateOffer = async (updates) => {
+  try {
+    const url = `/api/apps/storefront/offers/update`;
+    const request = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updates),
+    });
+    const res = await request.json();
+    if (!res.ok) {
+      throw new Error("Failed to update offer reason -->");
+    }
+  } catch (err) {
+    throw new Error("Failed to update offer reason -->" + err.message);
+  }
+};
 export {
   createStorefrontOffer,
   getStorefrontOffers,
   deleteStorefrontOffer,
   updateStorefrontOfferPosition,
+  getOffer,
+  updateOffer,
 };

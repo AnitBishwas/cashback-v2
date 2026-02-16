@@ -140,7 +140,7 @@ const deleteStoreFrontOffer = async (id, userInfo) => {
   }
 };
 
-const updateOfferPosition = async (id, newPosition) => {
+const updateOfferPosition = async (id, newPosition, userInfo) => {
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
@@ -194,6 +194,7 @@ const updateOfferPosition = async (id, newPosition) => {
     await session.commitTransaction();
   } catch (err) {
     await session.abortTransaction();
+    console.log(err);
     throw new Error(
       "Failed to update offer position reason --> " + err.message
     );
@@ -220,10 +221,10 @@ const updateOfferPosition = async (id, newPosition) => {
  * @property {string} id - user id
  * @property {string} email - user email
  */
-const updateStorontOffer = async (id, updates) => {
+const updateStorontOffer = async (id, updates, userInfo) => {
   const session = await mongoose.startSession();
   try {
-    session.tartTransaction();
+    session.startTransaction();
     const offerUpdate = await StorefrontOfferModel.findByIdAndUpdate(id, {
       ...updates,
     })

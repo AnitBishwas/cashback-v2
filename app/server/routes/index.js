@@ -6,6 +6,7 @@ import discountRoutes from "./admin_routes/discounts.js";
 import customerRoutes from "./admin_routes/customer.js";
 import distributionRoutes from "./admin_routes/distribution.js";
 import storeFrontRoutes from "./admin_routes/storefront.js";
+import customerWalletRoutes from "./admin_routes/customerWallet.js";
 
 const userRoutes = Router();
 
@@ -223,4 +224,5 @@ userRoutes.use("/discounts", discountRoutes);
 userRoutes.use("/customer", customerRoutes);
 userRoutes.use("/distribution", distributionRoutes);
 userRoutes.use("/storefront", storeFrontRoutes);
+userRoutes.use("/customerWallet", customerWalletRoutes);
 export default userRoutes;

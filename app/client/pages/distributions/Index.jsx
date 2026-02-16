@@ -15,6 +15,7 @@ import { useCallback, useEffect, useEffectEvent, useState } from "react";
 import CustomerDistributionRow from "../../components/distribution/CustomerDistributionRow";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { distributeCashback } from "../../helpers/distribute.js";
+import BulkDistribution from "../../components/distribution/BulkDistribution";
 
 const Distribution = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -116,6 +117,9 @@ const Distribution = () => {
       document.removeEventListener("custom:CustomersSelected", () => {});
     };
   }, []);
+  const handleBulkDistributeButtonClick = () => {
+    document.dispatchEvent(new Event("custom:bulkDistribute"));
+  };
   useEffect(() => {
     setPayloadValid(true);
     if (requestpayload.length == 0) {
@@ -141,7 +145,14 @@ const Distribution = () => {
   return (
     <>
       <CustomerPopup />
-      <Page title="Manage distribution">
+      <Page
+        title="Manage distribution"
+        primaryAction={{
+          content: "Bulk distribute",
+          onAction: handleBulkDistributeButtonClick,
+        }}
+      >
+        <BulkDistribution />
         <Layout>
           <Layout.Section>
             <Card>

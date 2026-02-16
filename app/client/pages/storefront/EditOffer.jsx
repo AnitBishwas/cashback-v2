@@ -1,6 +1,18 @@
-import { Modal, TitleBar, useAppBridge } from "@shopify/app-bridge-react";
+import { useAppBridge } from "@shopify/app-bridge-react";
 import { useState, useCallback, useEffect } from "react";
-import { Card, InlineGrid, TextField, Select } from "@shopify/polaris";
+import {
+  Card,
+  InlineGrid,
+  TextField,
+  Select,
+  Page,
+  BlockStack,
+  Text,
+} from "@shopify/polaris";
+import { navigate, usePath } from "raviger";
+import { getOffer, updateOffer } from "../../helpers/storefront.js";
+import { RefreshIcon } from "@shopify/polaris-icons";
+import RichTextEditor from "../../components/blocks/RichTextEditor.jsx";
 
 const OfferEditForm = () => {
   const shopify = useAppBridge();
@@ -15,6 +27,8 @@ const OfferEditForm = () => {
   const [infoDescription, setInfoDescription] = useState("");
   const [infoTermsConditions, setInfoTermsConditions] = useState("");
   const [loading, setLoading] = useState(false);
+  const [refreshLoading, setRefreshLoading] = useState(false);
+  const path = usePath();
 
   const statusOptions = [
     {
@@ -63,13 +77,9 @@ const OfferEditForm = () => {
     infoDescription?.trim() &&
     infoTermsConditions?.trim();
 
-  document.addEventListener("custom:offerEditFormDisplay", async (e) => {
+  const getCurrentOfferConfiguration = async (offerId) => {
     try {
-      if (!e.detail.offer) {
-        throw new Error("Offer not provided");
-      }
-      const offer = e.detail.offer;
-      shopify.modal.show("offer_edit_form");
+      const offer = await getOffer(offerId);
       setOffer(offer);
       setDiscountCode(offer.code);
       setDiscountStatus(offer.status);
@@ -81,19 +91,80 @@ const OfferEditForm = () => {
       setInfoDescription(offer.info.description);
       setInfoTermsConditions(offer.info.terms);
     } catch (err) {
+      console.log("Failed to get offer configurations");
       shopify.toast.show("Failed", { isError: true });
-      console.log("Failed to display edit form reason -->" + err.message);
     }
-  });
-
+  };
+  const handleRefreshButton = async (offerId) => {
+    try {
+      setRefreshLoading(true);
+      await getCurrentOfferConfiguration(offerId);
+    } catch (err) {
+      console.log("Failed to handle refresh button");
+      shopify.toast.show("Failed", {
+        isError: true,
+      });
+    } finally {
+      setRefreshLoading(false);
+    }
+  };
+  const handleOfferUpdate = async () => {
+    setLoading(true);
+    try {
+      const payload = {
+        _id: offer._id,
+        code: discountCode,
+        status: discountStatus,
+        title: discountTitle,
+        description: discountDescription,
+        btn: {
+          text: discountBtnText,
+          url: discountBtnRedirection,
+        },
+        info: {
+          title: infoTitle,
+          description: infoDescription,
+          terms: infoTermsConditions,
+        },
+      };
+      console.log(payload);
+      const offerUpdate = await updateOffer(payload);
+      shopify.toast.show("Updated");
+      navigate("/storefront-offers");
+    } catch (err) {
+      console.log("Failed to handle offer update reason -->" + err.message);
+      shopify.toast.show("Failed", { isError: true });
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    const offerId = path.replace("/storefront-offers/", "");
+    (async () => {
+      getCurrentOfferConfiguration(offerId);
+    })();
+  }, []);
   return (
-    <Modal id="offer_edit_form">
-      <TitleBar title={`Edit offer ${offer?.code}`}>
-        <button>Cancel</button>
-        <button disabled={!isFormValid} variant="primary">
-          Update
-        </button>
-      </TitleBar>
+    <Page
+      title={`Edit offer ${offer.code}`}
+      backAction={{
+        onAction: () => navigate("/storefront-offers"),
+      }}
+      primaryAction={{
+        content: "Update",
+        disabled: !isFormValid,
+        loading: loading,
+        onAction: handleOfferUpdate,
+      }}
+      secondaryActions={[
+        {
+          content: "Reset",
+          icon: RefreshIcon,
+          onAction: () => handleRefreshButton(offer._id),
+          loading: refreshLoading,
+        },
+      ]}
+    >
       <Card>
         <InlineGrid columns={2} gap={1000}>
           <TextField
@@ -114,11 +185,17 @@ const OfferEditForm = () => {
           onChange={handleDiscountTitleChange}
           label="Discount title"
         />
-        <TextField
-          value={discountDescription}
-          onChange={handleDiscountDescriptionChange}
-          label="Discount desciption"
-        />
+        <div style={{ marginTop: 14 }}></div>
+        <BlockStack gap={100}>
+          <Text>Discount Description</Text>
+          <div>
+            <RichTextEditor
+              value={discountDescription}
+              onChange={handleDiscountDescriptionChange}
+              placeholder="Discount description"
+            />
+          </div>
+        </BlockStack>
         <div style={{ marginTop: 14 }}></div>
         <InlineGrid columns={2} gap={1000}>
           <TextField
@@ -140,19 +217,30 @@ const OfferEditForm = () => {
           label="Info title"
         />
         <div style={{ marginTop: 14 }}></div>
-        <TextField
-          value={infoDescription}
-          onChange={handleInfoDescriptionChange}
-          label="Info description"
-        />
+        <BlockStack gap={100}>
+          <Text>Info description</Text>
+          <div>
+            <RichTextEditor
+              value={infoDescription}
+              onChange={handleInfoDescriptionChange}
+              placeholder="Info description"
+            />
+          </div>
+        </BlockStack>
         <div style={{ marginTop: 14 }}></div>
-        <TextField
-          value={infoTermsConditions}
-          onChange={handleInfoTermsConditionsChange}
-          label="Info terms and conditions"
-        />
+        <BlockStack gap={100}>
+          <Text>Info terms and conditions</Text>
+          <div>
+            <RichTextEditor
+              value={infoTermsConditions}
+              onChange={handleInfoTermsConditionsChange}
+              placeholder="Info terms and conditions"
+            />
+          </div>
+        </BlockStack>
       </Card>
-    </Modal>
+      <div style={{ marginBottom: 100 }}></div>
+    </Page>
   );
 };
 export default OfferEditForm;

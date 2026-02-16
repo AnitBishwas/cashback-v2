@@ -1,6 +1,8 @@
 import { Router } from "express";
 import clientProvider from "../../../utils/clientProvider.js";
 import widgetRoutes from "./widget.js";
+import walletLandingRoutes from "./walletLanding.js";
+import transactionRoutes from "./transaction.js";
 const proxyRouter = Router();
 
 /**
@@ -19,4 +21,6 @@ proxyRouter.get("/json", async (req, res) => {
   }
 });
 proxyRouter.use("/widget", widgetRoutes);
+proxyRouter.use("/landing", walletLandingRoutes);
+proxyRouter.use("/transactions", transactionRoutes);
 export default proxyRouter;

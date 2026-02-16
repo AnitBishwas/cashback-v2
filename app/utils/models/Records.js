@@ -5,7 +5,13 @@ const recordSchema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
-      enum: ["settings", "distribution", "discounts", "storefront/offers"],
+      enum: [
+        "settings",
+        "distribution",
+        "discounts",
+        "storefront/offers",
+        "customer/phone",
+      ],
     },
     action: {
       type: String,

@@ -1,9 +1,13 @@
-export default function ({ home }) {
-  console.log('Home ---0--0--->>>', home)
+import Announcement from "./Announcement.jsx";
+import LandingContent from "./LandingContent.jsx";
 
+const Landing = () => {
   return (
-    <div className="tw-text-5xl tw-text-red-600">
-      hetretetette ---
-    </div>
-  )
-}
+    <>
+      <Announcement />
+      <LandingContent />
+    </>
+  );
+};
+
+export default Landing;

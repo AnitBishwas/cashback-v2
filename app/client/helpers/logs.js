@@ -43,8 +43,40 @@ const getDistributionLogs = async () => {
     );
   }
 };
+const getStorefrintOfferLogs = async () => {
+  try {
+    const url = `/api/apps/logs?type=storefront/offers`;
+    const request = await fetch(url);
+    const response = await request.json();
+    if (!response.ok) {
+      throw new Error("Failed to get logs");
+    }
+    return response.logs;
+  } catch (err) {
+    throw new Error(
+      "🕔 Failed to get cashback settings logs reason -->" + err.message
+    );
+  }
+};
+const getCustomerChangesLogs = async () => {
+  try {
+    const url = `/api/apps/logs?type=customer/phone`;
+    const request = await fetch(url);
+    const response = await request.json();
+    if (!response.ok) {
+      throw new Error("Failed to get logs");
+    }
+    return response.logs;
+  } catch (err) {
+    throw new Error(
+      "🕔 Failed to get cashback settings logs reason -->" + err.message
+    );
+  }
+};
 export {
   getCashbackSettingsLogs,
   getCashbackDiscountLogs,
   getDistributionLogs,
+  getStorefrintOfferLogs,
+  getCustomerChangesLogs,
 };

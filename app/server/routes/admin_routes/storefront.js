@@ -7,6 +7,7 @@ import {
   updateOfferPosition,
   updateStorontOffer,
 } from "../../controllers/storefront.js";
+import StorefrontOfferModel from "@swiss-beauty/cashback-schema/src/models/StorefrontOffer.model.js";
 
 const storeFrontRoutes = Router();
 
@@ -42,7 +43,8 @@ storeFrontRoutes.post("/offers/updatePosition", async (req, res) => {
     }
     const updatePostion = await updateOfferPosition(
       payload.id,
-      payload.position
+      payload.position,
+      res.locals.user_session.onlineAccessInfo.associated_user
     );
     res.status(200).json({
       ok: true,
@@ -61,10 +63,19 @@ storeFrontRoutes.post("/offers/update", async (req, res) => {
       throw new Error("Required paramters missing");
     }
     const isPayloadValid = storeFrontOfferValidationSchema.validate(payload);
-    console.log(isPayloadValid);
-    // const offerUpdate = await updateStorontOffer(isPayloadValid.value._id,isPayloadValid.id)
+    const offerUpdate = await updateStorontOffer(
+      isPayloadValid.value._id,
+      isPayloadValid.value,
+      res.locals.user_session.onlineAccessInfo.associated_user
+    );
+    res.status(200).json({
+      ok: true,
+    });
   } catch (err) {
-    res.status();
+    console.log(err);
+    res.status(400).json({
+      ok: false,
+    });
   }
 });
 
@@ -97,6 +108,23 @@ storeFrontRoutes.get("/offers", async (req, res) => {
     res.status(200).json({
       ok: true,
       offers: [...offersList],
+    });
+  } catch (err) {
+    res.status(400).json({
+      ok: false,
+    });
+  }
+});
+storeFrontRoutes.get("/offers/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      throw new Error("Required param missing");
+    }
+    const offer = await StorefrontOfferModel.findById(id).lean();
+    res.status(200).json({
+      ok: true,
+      offer: { ...offer },
     });
   } catch (err) {
     res.status(400).json({

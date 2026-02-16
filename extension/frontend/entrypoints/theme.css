@@ -1,3 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.react-calendar__navigation__arrow.react-calendar__navigation__next2-button,.react-calendar__navigation__arrow.react-calendar__navigation__prev2-button{
+    display: none;
+}
+.react-calendar{
+    border:none;
+}
+.react-calendar__navigation__arrow.react-calendar__navigation__next-button{
+    transform: scaleX(-1);
+}
+.react-calendar__navigation{
+    height: max-content;
+}
+.react-calendar__navigation{
+    display:none;
+}
+.react-calendar__month-view__weekdays__weekday abbr{
+    font-family:'Roboto';
+    text-decoration: none;
+    font-size:12px;
+    font-weight:500;
+    line-height:normal;
+}
+.react-calendar__tile.react-calendar__month-view__days__day abbr{
+    font-family: 'Roboto';
+    font-size:12px;
+    font-weight:400;
+    line-height: normal;
+    color: #000;
+}
+.react-calendar__tile.react-calendar__tile--now.react-calendar__month-view__days__day{
+    background: transparent;
+}
+.react-calendar__tile.react-calendar__tile--active{
+    background-color:#FC2679;
+    border-radius:10000px;
+}
+.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus{
+    background-color:#FC2679; 
+}
+.react-calendar__tile.react-calendar__tile--active abbr,.react-calendar__tile--active:enabled:hover abbr, .react-calendar__tile--active:enabled:focus abbr{
+    color:#fff;
+}
+.react-calendar__tile.react-calendar__tile--now.react-calendar__month-view__days__day abbr{
+    color:#000;
+}
+.shopify-block.shopify-app-block{
+    padding:0px;
+}
+.cashback-cart-widget .keen-slider__slide p {
+  margin: 0 !important;
+}
+.cashback-cart-widget .keen-slider__slide{
+    max-width: 100%!important;
+}

@@ -12,6 +12,7 @@ export default function App() {
     <PolarisProvider i18n={translations}>
       <AppBridgeProvider>
         <ui-nav-menu>
+          <Link href="/customer-wallet">Customer wallet</Link>
           <Link href="/discounts">Manage Discounts</Link>
           <Link href="/distribution">Manage Distribution</Link>
           <Link href="/storefront-offers">Storefront offers</Link>

@@ -5,7 +5,13 @@ const logsRouter = Router();
 
 logsRouter.get("/", async (req, res) => {
   try {
-    const validLogsType = ["settings", "distribution", "discounts"];
+    const validLogsType = [
+      "settings",
+      "distribution",
+      "discounts",
+      "storefront/offers",
+      "customer/phone",
+    ];
     const logsType = req.query?.type
       ? validLogsType.indexOf(req.query.type) != -1
       : false;

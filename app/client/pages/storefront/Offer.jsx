@@ -1,18 +1,16 @@
 import { Card, EmptyState, Layout, Page, Text } from "@shopify/polaris";
 import { useEffect, useState } from "react";
 import { DiscountFilledIcon } from "@shopify/polaris-icons";
-import OfferCreateForm from "../../components/storefront/OfferCreateForm";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { getStorefrontOffers } from "../../helpers/storefront.js";
 import OffersList from "../../components/storefront/OffersList";
+import { useNavigate } from "raviger";
+import OfferChangesLogs from "../../components/storefront/OfferChangesLogs.jsx";
 
 const StorefrontOffer = () => {
   const shopify = useAppBridge();
   const [offers, setOffers] = useState([]);
-
-  const displayDiscountCreateForm = () => {
-    shopify.modal.show("offer_create_form");
-  };
+  const navigator = useNavigate();
 
   useEffect(() => {
     let isMounted = true;
@@ -48,13 +46,12 @@ const StorefrontOffer = () => {
 
   return (
     <>
-      <OfferCreateForm />
       <Page
         title="Manage storefront offers"
         primaryAction={{
           content: "Add offer",
           icon: DiscountFilledIcon,
-          onAction: displayDiscountCreateForm,
+          onAction: () => navigator("/storefront-offers/create"),
         }}
       >
         <Layout>
@@ -74,9 +71,7 @@ const StorefrontOffer = () => {
             </Card>
           </Layout.Section>
           <Layout.Section variant="oneThird">
-            <Card>
-              <Text>Somthing</Text>
-            </Card>
+            <OfferChangesLogs />
           </Layout.Section>
         </Layout>
       </Page>

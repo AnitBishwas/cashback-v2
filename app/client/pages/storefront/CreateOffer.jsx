@@ -1,7 +1,17 @@
-import { useAppBridge, Modal, TitleBar } from "@shopify/app-bridge-react";
-import { TextField, Card, InlineGrid, Select } from "@shopify/polaris";
+import { useAppBridge } from "@shopify/app-bridge-react";
+import {
+  TextField,
+  Card,
+  InlineGrid,
+  Select,
+  Page,
+  BlockStack,
+  Text,
+} from "@shopify/polaris";
 import { useCallback, useState } from "react";
 import { createStorefrontOffer } from "../../helpers/storefront.js";
+import RichTextEditor from "../../components/blocks/RichTextEditor.jsx";
+import { useNavigate } from "raviger";
 
 const OfferCreateForm = () => {
   const shopify = useAppBridge();
@@ -15,6 +25,7 @@ const OfferCreateForm = () => {
   const [infoDescription, setInfoDescription] = useState("");
   const [infoTermsConditions, setInfoTermsConditions] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const statusOptions = [
     {
@@ -64,17 +75,6 @@ const OfferCreateForm = () => {
     infoDescription?.trim() &&
     infoTermsConditions?.trim();
 
-  const handleFormClosure = () => {
-    setDiscountCode("");
-    setDiscountStatus("disabled");
-    setDiscountTitle("");
-    setDiscountDescription("");
-    setDiscountBtnText("");
-    setDiscountBtnRedirection("");
-    setInfoTitle("");
-    setInfoDescription("");
-    setInfoTermsConditions("");
-  };
   const handleFormSubmission = async () => {
     setLoading(true);
     try {
@@ -97,8 +97,7 @@ const OfferCreateForm = () => {
       if (createOffer.ok) {
         shopify.toast.show("Created");
       }
-      shopify.modal.hide("offer_create_form");
-      document.dispatchEvent(new Event("custom:UpdateStorefrontOffer"));
+      navigate("/storefront-offers");
     } catch (err) {
       console.log("Failed to handle form submission reason -->" + err.message);
       shopify.toast.show("Failed", {
@@ -109,24 +108,18 @@ const OfferCreateForm = () => {
     }
   };
   return (
-    <Modal id="offer_create_form" onHide={handleFormClosure}>
-      <TitleBar title="Create discount">
-        <button>Cancel</button>
-        {!loading && (
-          <button
-            disabled={!isFormValid}
-            variant="primary"
-            onClick={handleFormSubmission}
-          >
-            Create
-          </button>
-        )}
-        {loading && (
-          <button disabled={true} loading="true" variant="primary">
-            Create
-          </button>
-        )}
-      </TitleBar>
+    <Page
+      title="Create storefront offer"
+      backAction={{
+        onAction: () => navigate("/storefront-offers"),
+      }}
+      primaryAction={{
+        content: "Create",
+        onAction: handleFormSubmission,
+        disabled: !isFormValid,
+        loading: loading,
+      }}
+    >
       <Card>
         <InlineGrid columns={2} gap={1000}>
           <TextField
@@ -147,11 +140,17 @@ const OfferCreateForm = () => {
           onChange={handleDiscountTitleChange}
           label="Discount title"
         />
-        <TextField
-          value={discountDescription}
-          onChange={handleDiscountDescriptionChange}
-          label="Discount desciption"
-        />
+        <div style={{ marginTop: 14 }}></div>
+        <BlockStack gap={100}>
+          <Text>Discount Description</Text>
+          <div>
+            <RichTextEditor
+              value={discountDescription}
+              onChange={handleDiscountDescriptionChange}
+              placeholder="Discount description"
+            />
+          </div>
+        </BlockStack>
         <div style={{ marginTop: 14 }}></div>
         <InlineGrid columns={2} gap={1000}>
           <TextField
@@ -173,19 +172,30 @@ const OfferCreateForm = () => {
           label="Info title"
         />
         <div style={{ marginTop: 14 }}></div>
-        <TextField
-          value={infoDescription}
-          onChange={handleInfoDescriptionChange}
-          label="Info description"
-        />
+        <BlockStack gap={100}>
+          <Text>Info description</Text>
+          <div>
+            <RichTextEditor
+              value={infoDescription}
+              onChange={handleInfoDescriptionChange}
+              placeholder="Info description"
+            />
+          </div>
+        </BlockStack>
         <div style={{ marginTop: 14 }}></div>
-        <TextField
-          value={infoTermsConditions}
-          onChange={handleInfoTermsConditionsChange}
-          label="Info terms and conditions"
-        />
+        <BlockStack gap={100}>
+          <Text>Info terms and conditions</Text>
+          <div>
+            <RichTextEditor
+              value={infoTermsConditions}
+              onChange={handleInfoTermsConditionsChange}
+              placeholder="Info terms and conditions"
+            />
+          </div>
+        </BlockStack>
       </Card>
-    </Modal>
+      <div style={{ marginBottom: 100 }}></div>
+    </Page>
   );
 };
 export default OfferCreateForm;

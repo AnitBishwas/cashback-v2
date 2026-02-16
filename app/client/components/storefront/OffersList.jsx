@@ -12,10 +12,11 @@ import { DeleteIcon, EditIcon } from "@shopify/polaris-icons";
 import { DragHandleIcon } from "@shopify/polaris-icons";
 import OfferDeletePopup from "./OfferDeletePopup";
 import { updateStorefrontOfferPosition } from "../../helpers/storefront.js";
-import OfferEditForm from "./OfferEditForm";
+import { useNavigate } from "raviger";
 
 const OffersList = ({ offers }) => {
   const [offersList, setOffersList] = useState(offers);
+  const navigate = useNavigate();
   const handleDeleteButtonClick = (offer) => {
     document.dispatchEvent(
       new CustomEvent("custom:OfferDeletePopup", {
@@ -46,13 +47,7 @@ const OffersList = ({ offers }) => {
     }
   };
   const handleEditButtonClick = (offer) => {
-    document.dispatchEvent(
-      new CustomEvent("custom:offerEditFormDisplay", {
-        detail: {
-          offer,
-        },
-      })
-    );
+    navigate("/storefront-offers/" + offer._id);
   };
   useEffect(() => {
     setOffersList(offers);
@@ -60,7 +55,6 @@ const OffersList = ({ offers }) => {
   return (
     <>
       <OfferDeletePopup />
-      <OfferEditForm />
       <ReactSortable
         onEnd={handlePositionUpdate}
         list={offersList}
