@@ -38,7 +38,7 @@ jobs:
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
 
           echo "Building Docker image..."
-          docker build -t $IMAGE_URI:latest .
+          docker build --build-arg NPM_TOKEN=${{ secrets.NPM_TOKEN }} -t $IMAGE_URI:latest .
 
           echo "Pushing Docker image..."
           docker push $IMAGE_URI:latest
