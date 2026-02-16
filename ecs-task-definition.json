@@ -1,0 +1,200 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:476114140918:task-definition/custom-apps-task-defintion:1",
+  "containerDefinitions": [
+    {
+      "name": "cashback-app",
+      "image": "476114140918.dkr.ecr.ap-south-1.amazonaws.com/cashback-app",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "cashback-app-80-tcp",
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "PORT",
+          "value": "8080"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "SHOPIFY_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:SHOPIFY_API_KEY::"
+        },
+        {
+          "name": "SHOPIFY_API_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:SHOPIFY_API_SECRET::"
+        },
+        {
+          "name": "SHOPIFY_API_SCOPES",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:SHOPIFY_API_SCOPES::"
+        },
+        {
+          "name": "SHOPIFY_API_OPTIONAL_SCOPES",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:SHOPIFY_API_OPTIONAL_SCOPES::"
+        },
+        {
+          "name": "SHOPIFY_APP_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:SHOPIFY_APP_URL::"
+        },
+        {
+          "name": "SHOPIFY_API_VERSION",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:SHOPIFY_API_VERSION::"
+        },
+        {
+          "name": "MONGO_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:MONGO_URL::"
+        },
+        {
+          "name": "ENCRYPTION_STRING",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:ENCRYPTION_STRING::"
+        },
+        {
+          "name": "NPM_CONFIG_FORCE",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:NPM_CONFIG_FORCE::"
+        },
+        {
+          "name": "VITE_SHOPIFY_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:VITE_SHOPIFY_API_KEY::"
+        },
+        {
+          "name": "APP_NAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:APP_NAME::"
+        },
+        {
+          "name": "APP_HANDLE",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:APP_HANDLE::"
+        },
+        {
+          "name": "APP_PROXY_PREFIX",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:APP_PROXY_PREFIX::"
+        },
+        {
+          "name": "APP_PROXY_SUBPATH",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:APP_PROXY_SUBPATH::"
+        },
+        {
+          "name": "TABLE_ID",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:TABLE_ID::"
+        },
+        {
+          "name": "DATASET_ID",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:DATASET_ID::"
+        },
+        {
+          "name": "PROJECT_ID",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:PROJECT_ID::"
+        },
+        {
+          "name": "CREDS",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:CREDS::"
+        },
+        {
+          "name": "MOE_WORKSPACE_ID",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:MOE_WORKSPACE_ID::"
+        },
+        {
+          "name": "MOE_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:MOE_API_KEY::"
+        },
+        {
+          "name": "MOE_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:MOE_URL::"
+        },
+        {
+          "name": "AWS_REGION",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:AWS_REGION::"
+        },
+        {
+          "name": "AWS_S3_BUCKET",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:AWS_S3_BUCKET::"
+        },
+        {
+          "name": "AWS_SQS_QUEUE_URL",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:AWS_SQS_QUEUE_URL::"
+        },
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:AWS_ACCESS_KEY_ID::"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:476114140918:secret:cashback-app-creds-C7FOE1:AWS_SECRET_ACCESS_KEY::"
+        }
+      ],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "ulimits": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/custom-apps-task-defintion",
+          "awslogs-create-group": "true",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      },
+      "systemControls": []
+    }
+  ],
+  "family": "custom-apps-task-defintion",
+  "taskRoleArn": "arn:aws:iam::476114140918:role/ecsTaskRole",
+  "executionRoleArn": "arn:aws:iam::476114140918:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 1,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": ["EC2", "FARGATE", "MANAGED_INSTANCES"],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "3072",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2026-02-16T07:22:19.388Z",
+  "registeredBy": "arn:aws:iam::476114140918:root",
+  "enableFaultInjection": false,
+  "tags": []
+}
