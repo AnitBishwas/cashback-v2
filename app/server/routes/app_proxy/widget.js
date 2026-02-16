@@ -6,6 +6,7 @@ const widgetRoutes = Router();
 
 widgetRoutes.get("/balance", async (req, res) => {
   try {
+    console.log("get balance route was hit")
     const customerId = req.query.logged_in_customer_id;
     const customerWallet = await WalletModel.findOne({
       customerId: customerId,
