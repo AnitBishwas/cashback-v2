@@ -23,6 +23,7 @@ widgetRoutes.get("/balance", async (req, res) => {
     });
   }
 });
+
 widgetRoutes.get("/", async (req, res) => {
   try {
     const customerId = req.query.logged_in_customer_id;
