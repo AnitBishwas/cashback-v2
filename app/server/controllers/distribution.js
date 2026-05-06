@@ -120,18 +120,18 @@ const distributeCashback = async (
           userEmail: user.email,
         },
       });
+      sendS2sEventOnManualDistribution({
+        pointId: pointDoc._id.toString(),
+        shop,
+      });
     }
 
     await session.commitTransaction();
-    sendS2sEventOnManualDistribution({
-      pointId: pointDoc._id.toString(),
-      shop,
-    });
 
     for (const ev of events) createServerEvent(ev);
   } catch (err) {
-    await session.abortTransaction();
     console.error("Cashback distribution failed:", err);
+    await session.abortTransaction();
     throw err;
   } finally {
     session.endSession();
