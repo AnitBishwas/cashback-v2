@@ -127,7 +127,7 @@ const distributeCashback = async (
     for (const ev of events) {
       createServerEvent(ev);
       sendS2sEventOnManualDistribution({
-        pointId: env.params.pointId,
+        pointId: ev.params.pointId,
         shop,
       });
     }
