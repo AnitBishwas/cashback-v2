@@ -21,7 +21,11 @@ const normalizeCustomerId = (id) =>
  * @param {object} user - admin user details
  */
 
-const distributeCashback = async (payload, user) => {
+const distributeCashback = async (
+  payload,
+  user,
+  shop = "swissbeauty-dev.myshopify.com"
+) => {
   const session = await mongoose.startSession();
   const events = [];
 
@@ -120,8 +124,9 @@ const distributeCashback = async (payload, user) => {
 
     await session.commitTransaction();
     sendS2sEventOnManualDistribution({
-      pointId: pointDoc._id.toString(), 
-    })
+      pointId: pointDoc._id.toString(),
+      shop,
+    });
 
     for (const ev of events) createServerEvent(ev);
   } catch (err) {
@@ -134,12 +139,11 @@ const distributeCashback = async (payload, user) => {
 };
 const sendS2sEventOnManualDistribution = async (payload) => {
   try {
-    console.log('Sending s2s event on manual cashback distribution')
+    console.log("Sending s2s event on manual cashback distribution");
     await sendMessageToSQS({
       topic: "CASHBACK_Manual_DISTRIBUTION",
-      ...payload
-    }) 
-
+      ...payload,
+    });
   } catch (err) {
     console.log(
       "Failed to s2s event on manual distributikon reason -->" + err.message

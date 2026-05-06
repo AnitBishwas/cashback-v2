@@ -56,12 +56,14 @@ distributionRoutes.post("/", async (req, res) => {
     const isPayloadValid = distributionValidationSchema.validate(payload, {
       convert: true,
     });
+    const shop = res.locals.user_session.shop;
     if (isPayloadValid.error) {
       throw new Error("Incorrect pyalod");
     }
     const distribute = await distributeCashback(
       payload,
-      res.locals.user_session.onlineAccessInfo.associated_user
+      res.locals.user_session.onlineAccessInfo.associated_user,
+      shop
     );
     res.status(200).json({
       ok: true,
