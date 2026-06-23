@@ -10,6 +10,9 @@ import {
   TextField,
   InlineStack,
   Layout,
+  Checkbox,
+  BlockStack,
+  Text
 } from "@shopify/polaris";
 import { useNavigate } from "raviger";
 import { useCallback, useEffect, useState } from "react";
@@ -26,6 +29,8 @@ const Settings = () => {
   const [allocationValue, setAllocationValue] = useState(0);
   const [maxCashbackValue, setMaxCashbackValue] = useState(0);
   const [cashbackExpiryPeriod, setCashbackExpiryPeriod] = useState(0);
+  const [cashbackExtension, setCashbackExtension] = useState(false);
+  const [cashbackExtensionPeriod, setCashbackExtensionPeriod] = useState(1);
 
   const usageOption = [
     {
@@ -71,6 +76,8 @@ const Settings = () => {
     (value) => setCashbackExpiryPeriod(value),
     []
   );
+  const handleCashbackExtensionCheckbox = useCallback((value) => setCashbackExtension(value), []);
+  const handleCashbackExtensionPeriodChange = useCallback((value) => setCashbackExtensionPeriod(value), []);
   const validatePayload = () => {
     try {
       let payload = {
@@ -84,8 +91,11 @@ const Settings = () => {
         },
         maxCashback: maxCashbackValue,
         expiryPeriod: cashbackExpiryPeriod,
+        extension: {
+          enable: cashbackExtension,
+          period: cashbackExtensionPeriod
+        }
       };
-      console.log(payload);
       if (payload.usage.type != "fixed" && payload.usage.type != "percentage") {
         throw new Error("Incorrect usage type");
       }
@@ -135,12 +145,15 @@ const Settings = () => {
         if (!settings.ok) {
           throw new Error("Failed to get cashback settings");
         }
+        console.log(settings)
         setSelectedUsageOption(settings.usage.type);
         setUsageValue(settings.usage.value);
         setSelectedAllocationOption(settings.order_allocation.type);
         setAllocationValue(settings.order_allocation.value);
         setMaxCashbackValue(settings.max_cashback);
         setCashbackExpiryPeriod(settings.expiry_period);
+        setCashbackExtension(settings.extension?.enable || false);
+        setCashbackExtensionPeriod(settings.extension?.period || 1);
       } catch (err) {
         console.log("Failed to get cashback settings reason -->" + err.message);
       }
@@ -210,6 +223,23 @@ const Settings = () => {
                   onChange={handleCashbackExpiryValueChange}
                   min={0}
                 />
+              </InlineGrid>
+              <div style={{ marginTop: 14 }}></div>
+              <InlineGrid columns={2} gap={300} align="space-between" justify="center">
+                <BlockStack>
+                  <Checkbox helpText="Set cashback extension upon expiry if set to true cashback will be extended once after expriy for the provided time period" onChange={handleCashbackExtensionCheckbox} checked={cashbackExtension} value={cashbackExtension} label="Enable cashback extension" />
+                </BlockStack>
+                {
+                  cashbackExtension && <TextField
+                    suffix="Days"
+                    type="number"
+                    value={cashbackExtensionPeriod}
+                    label="Cashback extension period"
+                    onChange={handleCashbackExtensionPeriodChange}
+                    min={1}
+                  />
+                }
+
               </InlineGrid>
             </form>
           </Card>

@@ -40,6 +40,10 @@ settingRoutes.post("/update", async (req, res) => {
       },
       max_cashback: isPayloadValid.maxCashback,
       expiry_period: isPayloadValid.expiryPeriod,
+      extension: {
+        enable: isPayloadValid.extension?.enable || false,
+        period: isPayloadValid.extension?.period || 1,
+      }
     };
     await handleCashbackSettingUpdateTransaction(
       settingsUpdatePayload,

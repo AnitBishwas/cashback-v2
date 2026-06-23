@@ -11,6 +11,10 @@ const settingsValidationSchema = Joi.object({
   }),
   maxCashback: Joi.number().min(0).required(),
   expiryPeriod: Joi.number().min(0).required(),
+  extension:{
+    enable: Joi.boolean().required(),
+    period: Joi.number().min(1)
+  }
 });
 
 export default settingsValidationSchema;
