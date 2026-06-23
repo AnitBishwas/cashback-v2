@@ -38,6 +38,14 @@ const settingsSchema = new mongoose.Schema({
       required: true,
     },
   },
+  extension: {
+    enable: {
+      type: Boolean,
+    },
+    period: {
+      type: Number,
+    },
+  },
 });
 
 const SettingsModal = mongoose.model("Settings", settingsSchema);

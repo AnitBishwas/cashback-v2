@@ -35,6 +35,15 @@ const pointSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    refreshed:{
+      state: {
+        type: Boolean,
+        default: false
+      },
+      date: {
+        type: Date
+      }
+    },
     expiresOn: {
       type: Date,
       required: true,
