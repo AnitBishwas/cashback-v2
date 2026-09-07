@@ -49,12 +49,7 @@ type ColorKeyword = "subdued" | "base" | "strong";
  * Defines the possible keyword values for border sizes.
  */
 type BorderSizeKeyword =
-  | "small"
-  | "base"
-  | "small-100"
-  | "large"
-  | "large-100"
-  | "none";
+  "small" | "base" | "small-100" | "large" | "large-100" | "none";
 
 /**
  * Defines the possible keyword values for border styles.
@@ -87,10 +82,7 @@ type BoxBorderRadii =
  * @template T The base type for the values.
  */
 type MaybeAllValuesShorthandProperty<T> =
-  | T
-  | `${T} ${T}`
-  | `${T} ${T} ${T}`
-  | `${T} ${T} ${T} ${T}`;
+  T | `${T} ${T}` | `${T} ${T} ${T}` | `${T} ${T} ${T} ${T}`;
 
 /**
  * Augments the 'react' module to include type definitions for the 's-image'

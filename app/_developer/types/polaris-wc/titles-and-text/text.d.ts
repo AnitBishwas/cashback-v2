@@ -26,13 +26,7 @@ type FontVariantNumeric = "auto" | "normal" | "tabular-nums";
  * Defines the possible keyword values for component tones.
  */
 type ComponentTone =
-  | "info"
-  | "success"
-  | "warning"
-  | "critical"
-  | "auto"
-  | "neutral"
-  | "caution";
+  "info" | "success" | "warning" | "critical" | "auto" | "neutral" | "caution";
 
 /**
  * Defines the possible values for the 'type' property of s-text.

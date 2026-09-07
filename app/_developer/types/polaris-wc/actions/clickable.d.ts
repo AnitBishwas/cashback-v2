@@ -90,12 +90,7 @@ type SizeUnitsOrNone = SizeUnits | "none";
  * Defines the possible keyword values for border sizes.
  */
 type BorderSizeKeyword =
-  | "small"
-  | "base"
-  | "small-100"
-  | "large"
-  | "large-100"
-  | "none";
+  "small" | "base" | "small-100" | "large" | "large-100" | "none";
 
 /**
  * Defines the possible keyword values for border styles.
@@ -128,10 +123,7 @@ type BoxBorderRadii =
  * @template T The base type for the values.
  */
 type MaybeAllValuesShorthandProperty<T> =
-  | T
-  | `${T} ${T}`
-  | `${T} ${T} ${T}`
-  | `${T} ${T} ${T} ${T}`;
+  T | `${T} ${T}` | `${T} ${T} ${T}` | `${T} ${T} ${T} ${T}`;
 
 /**
  * A utility type for shorthand properties that can take 1 or 2 values.
@@ -363,12 +355,7 @@ declare module "react" {
          * Specifies where to display the linked URL.
          */
         target?:
-          | "auto"
-          | (string & {})
-          | "_blank"
-          | "_self"
-          | "_parent"
-          | "_top";
+          "auto" | (string & {}) | "_blank" | "_self" | "_parent" | "_top";
 
         /**
          * The behavior of the button.

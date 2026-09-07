@@ -104,12 +104,7 @@ declare module "react" {
          * Specifies where to display the linked URL.
          */
         target?:
-          | "auto"
-          | (string & {})
-          | "_blank"
-          | "_self"
-          | "_parent"
-          | "_top";
+          "auto" | (string & {}) | "_blank" | "_self" | "_parent" | "_top";
 
         /**
          * Sets the tone of the Link, based on the intention of the information being conveyed.

@@ -43,7 +43,7 @@ settingRoutes.post("/update", async (req, res) => {
       extension: {
         enable: isPayloadValid.extension?.enable || false,
         period: isPayloadValid.extension?.period || 1,
-      }
+      },
     };
     await handleCashbackSettingUpdateTransaction(
       settingsUpdatePayload,

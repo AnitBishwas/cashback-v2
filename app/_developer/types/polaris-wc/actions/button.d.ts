@@ -651,12 +651,7 @@ declare module "react" {
          * Specifies where to display the linked URL.
          */
         target?:
-          | "_blank"
-          | "_self"
-          | "_parent"
-          | "_top"
-          | "auto"
-          | (string & {}); // 'AnyString' from doc is represented as (string & {})
+          "_blank" | "_self" | "_parent" | "_top" | "auto" | (string & {}); // 'AnyString' from doc is represented as (string & {})
 
         /**
          * Sets the tone of the Button, based on the intention of the information being conveyed.

@@ -155,7 +155,9 @@ const Distribution = () => {
         }}
         backAction={{
           content: "Home",
-          onAction: () => {navigator("/")}
+          onAction: () => {
+            navigator("/");
+          },
         }}
       >
         <BulkDistribution />

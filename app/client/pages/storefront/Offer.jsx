@@ -54,8 +54,10 @@ const StorefrontOffer = () => {
           onAction: () => navigator("/storefront-offers/create"),
         }}
         backAction={{
-          content: 'Home',
-          onAction:() => {navigator("/")}
+          content: "Home",
+          onAction: () => {
+            navigator("/");
+          },
         }}
       >
         <Layout>

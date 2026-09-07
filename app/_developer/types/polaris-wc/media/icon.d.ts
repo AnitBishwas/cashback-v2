@@ -11,13 +11,7 @@ type ColorKeyword = "subdued" | "base";
  * Defines the possible keyword values for icon tones.
  */
 type IconTone =
-  | "info"
-  | "success"
-  | "warning"
-  | "critical"
-  | "auto"
-  | "neutral"
-  | "caution";
+  "info" | "success" | "warning" | "critical" | "auto" | "neutral" | "caution";
 
 /**
  * Defines the possible keyword values for icon sizes.

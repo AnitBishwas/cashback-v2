@@ -8,6 +8,7 @@ import OfferCreateForm from "./pages/storefront/CreateOffer";
 import OfferEditForm from "./pages/storefront/EditOffer";
 import CustomerWallet from "./pages/customerWallet/Index";
 import CustomerWalletInfo from "./pages/customerWallet/CustomerWallet";
+import Reports from "./pages/reports/Index.jsx";
 
 const routes = {
   "/": () => <Index />,
@@ -19,6 +20,7 @@ const routes = {
   "/storefront-offers/:id": () => <OfferEditForm />,
   "/customer-wallet": () => <CustomerWallet />,
   "/customer-wallet/:id": () => <CustomerWalletInfo />,
+  "/reports": () => <Reports />,
 };
 
 export default routes;

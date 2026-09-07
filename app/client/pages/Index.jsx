@@ -32,6 +32,9 @@ const HomePage = () => {
         <Card>
           <Link href="/settings">Settings</Link>
         </Card>
+        <Card>
+          <Link href="/reports">Reports</Link>
+        </Card>
       </InlineGrid>
     </Page>
   );

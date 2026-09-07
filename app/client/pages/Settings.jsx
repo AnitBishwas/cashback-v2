@@ -12,7 +12,7 @@ import {
   Layout,
   Checkbox,
   BlockStack,
-  Text
+  Text,
 } from "@shopify/polaris";
 import { useNavigate } from "raviger";
 import { useCallback, useEffect, useState } from "react";
@@ -76,8 +76,14 @@ const Settings = () => {
     (value) => setCashbackExpiryPeriod(value),
     []
   );
-  const handleCashbackExtensionCheckbox = useCallback((value) => setCashbackExtension(value), []);
-  const handleCashbackExtensionPeriodChange = useCallback((value) => setCashbackExtensionPeriod(value), []);
+  const handleCashbackExtensionCheckbox = useCallback(
+    (value) => setCashbackExtension(value),
+    []
+  );
+  const handleCashbackExtensionPeriodChange = useCallback(
+    (value) => setCashbackExtensionPeriod(value),
+    []
+  );
   const validatePayload = () => {
     try {
       let payload = {
@@ -93,8 +99,8 @@ const Settings = () => {
         expiryPeriod: cashbackExpiryPeriod,
         extension: {
           enable: cashbackExtension,
-          period: cashbackExtensionPeriod
-        }
+          period: cashbackExtensionPeriod,
+        },
       };
       if (payload.usage.type != "fixed" && payload.usage.type != "percentage") {
         throw new Error("Incorrect usage type");
@@ -145,7 +151,7 @@ const Settings = () => {
         if (!settings.ok) {
           throw new Error("Failed to get cashback settings");
         }
-        console.log(settings)
+        console.log(settings);
         setSelectedUsageOption(settings.usage.type);
         setUsageValue(settings.usage.value);
         setSelectedAllocationOption(settings.order_allocation.type);
@@ -225,12 +231,23 @@ const Settings = () => {
                 />
               </InlineGrid>
               <div style={{ marginTop: 14 }}></div>
-              <InlineGrid columns={2} gap={300} align="space-between" justify="center">
+              <InlineGrid
+                columns={2}
+                gap={300}
+                align="space-between"
+                justify="center"
+              >
                 <BlockStack>
-                  <Checkbox helpText="Set cashback extension upon expiry if set to true cashback will be extended once after expriy for the provided time period" onChange={handleCashbackExtensionCheckbox} checked={cashbackExtension} value={cashbackExtension} label="Enable cashback extension" />
+                  <Checkbox
+                    helpText="Set cashback extension upon expiry if set to true cashback will be extended once after expriy for the provided time period"
+                    onChange={handleCashbackExtensionCheckbox}
+                    checked={cashbackExtension}
+                    value={cashbackExtension}
+                    label="Enable cashback extension"
+                  />
                 </BlockStack>
-                {
-                  cashbackExtension && <TextField
+                {cashbackExtension && (
+                  <TextField
                     suffix="Days"
                     type="number"
                     value={cashbackExtensionPeriod}
@@ -238,8 +255,7 @@ const Settings = () => {
                     onChange={handleCashbackExtensionPeriodChange}
                     min={1}
                   />
-                }
-
+                )}
               </InlineGrid>
             </form>
           </Card>

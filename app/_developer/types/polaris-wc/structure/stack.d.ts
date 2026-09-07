@@ -78,12 +78,7 @@ type SizeUnitsOrNone = SizeUnits | "none";
  * Defines the possible keyword values for border sizes.
  */
 type BorderSizeKeyword =
-  | "small"
-  | "base"
-  | "small-100"
-  | "large"
-  | "large-100"
-  | "none";
+  "small" | "base" | "small-100" | "large" | "large-100" | "none";
 
 /**
  * Defines the possible keyword values for border styles.
@@ -131,10 +126,7 @@ type SizeKeyword =
  * @template T The base type for the values.
  */
 type MaybeAllValuesShorthandProperty<T> =
-  | T
-  | `${T} ${T}`
-  | `${T} ${T} ${T}`
-  | `${T} ${T} ${T} ${T}`;
+  T | `${T} ${T}` | `${T} ${T} ${T}` | `${T} ${T} ${T} ${T}`;
 
 /**
  * A utility type for shorthand properties that can take 1 or 2 values.
@@ -153,10 +145,7 @@ type MakeResponsive<T> = T | `@container${string}`; // The string can contain th
  */
 type BaselinePosition = "baseline" | "first baseline" | "last baseline";
 type ContentDistribution =
-  | "space-between"
-  | "space-around"
-  | "space-evenly"
-  | "stretch";
+  "space-between" | "space-around" | "space-evenly" | "stretch";
 type OverflowPosition =
   | "unsafe start"
   | "unsafe end"
@@ -173,16 +162,9 @@ type AlignContentKeyword =
   | OverflowPosition
   | ContentPosition;
 type AlignItemsKeyword =
-  | "normal"
-  | "stretch"
-  | BaselinePosition
-  | OverflowPosition
-  | ContentPosition;
+  "normal" | "stretch" | BaselinePosition | OverflowPosition | ContentPosition;
 type JustifyContentKeyword =
-  | "normal"
-  | ContentDistribution
-  | OverflowPosition
-  | ContentPosition;
+  "normal" | ContentDistribution | OverflowPosition | ContentPosition;
 
 /**
  * Defines the possible values for the 'direction' property of s-stack.

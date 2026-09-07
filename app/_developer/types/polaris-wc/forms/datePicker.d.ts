@@ -66,11 +66,7 @@ type DateRangeString =
  * It can be a single date, month, year, or a comma-separated list of these or ranges.
  */
 type DatePickerAllowDisallowString =
-  | DateString
-  | MonthString
-  | YearString
-  | DateRangeString
-  | (string & {}); // Allows for comma-separated lists and other valid strings
+  DateString | MonthString | YearString | DateRangeString | (string & {}); // Allows for comma-separated lists and other valid strings
 
 /**
  * Defines the string format for `allowDays` and `disallowDays` properties.

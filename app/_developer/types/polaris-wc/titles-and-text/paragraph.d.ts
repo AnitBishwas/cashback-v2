@@ -26,13 +26,7 @@ type FontVariantNumeric = "auto" | "normal" | "tabular-nums";
  * Defines the possible keyword values for component tones.
  */
 type ComponentTone =
-  | "info"
-  | "success"
-  | "warning"
-  | "critical"
-  | "auto"
-  | "neutral"
-  | "caution";
+  "info" | "success" | "warning" | "critical" | "auto" | "neutral" | "caution";
 
 /**
  * Augments the 'react' module to include type definitions for the 's-paragraph'

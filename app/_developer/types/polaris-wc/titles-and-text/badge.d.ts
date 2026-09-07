@@ -16,13 +16,7 @@ type BadgeSize = "base" | "large" | "large-100";
  * Defines the possible keyword values for badge tones.
  */
 type BadgeTone =
-  | "info"
-  | "success"
-  | "warning"
-  | "critical"
-  | "auto"
-  | "neutral"
-  | "caution";
+  "info" | "success" | "warning" | "critical" | "auto" | "neutral" | "caution";
 
 /**
  * Defines the possible keyword values for icon types.

@@ -17,6 +17,7 @@ export default function App() {
           <Link href="/distribution">Manage Distribution</Link>
           <Link href="/storefront-offers">Storefront offers</Link>
           <Link href="/settings">Settings</Link>
+          <Link href="/reports">Reports</Link>
         </ui-nav-menu>
         {RouteComponents}
       </AppBridgeProvider>
