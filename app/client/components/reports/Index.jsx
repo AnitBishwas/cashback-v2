@@ -134,6 +134,7 @@ const ReportsList = ({ pageSize = 2 }) => {
     [shopify, fetchReports, page, sortColumnIndex, sortDirection]
   );
 
+  
   const rowMarkup = useMemo(() => {
     return reports.map((report, index) => {
       const id = String(report._id);
